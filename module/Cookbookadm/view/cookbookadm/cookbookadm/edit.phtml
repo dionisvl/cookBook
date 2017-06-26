@@ -1,0 +1,45 @@
+<?php
+// module/Album/view/cookbookadm/cookbookadm/edit.phtml:
+
+$title = 'Edit recept';
+$this->headTitle($title);
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+
+
+$name = $form->get('name');
+$name->setAttribute('class', 'form-control');
+$name->setAttribute('placeholder', 'Name');
+
+$cookbookadm = $form->get('sostav');
+$cookbookadm->setAttribute('class', 'form-control');
+$cookbookadm->setAttribute('placeholder', 'Sostav');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('cookbookadm', [
+    'action' => 'edit',
+    'id'     => $id,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+    <div class="form-group">
+        <?= $this->formLabel($name) ?>
+        <?= $this->formElement($name) ?>
+        <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= $this->formLabel($cookbookadm) ?>
+        <?= $this->formElement($cookbookadm) ?>
+        <?= $this->formElementErrors()->render($cookbookadm, ['class' => 'help-block']) ?>
+    </div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();

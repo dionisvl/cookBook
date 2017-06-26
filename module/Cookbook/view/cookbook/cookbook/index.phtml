@@ -1,0 +1,65 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'My recepts';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<?php
+$form->setAttribute('action', $this->url('cookbook', ['action' => 'find']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+echo $this->formRow($form->get('find'));
+echo $this->formSubmit($form->get('submit'));
+
+echo $this->form()->closeTag();
+
+?>
+<ul>
+    <li><a href="<?= $this->url('cookbook', ['action' => 'index', 'id' => 1]) ?>">Десерты</a></li>
+    <li><a href="<?= $this->url('cookbook', ['action' => 'index', 'id' => 2]) ?>">Первые блюда</a></li>
+    <li><a href="<?= $this->url('cookbook', ['action' => 'index', 'id' => 3]) ?>">Вторые блюда</a></li>
+</ul>
+<br>
+
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Consist</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($recepts as $recept) : ?>
+        <tr>
+            <td><?= $this->escapeHtml($recept->name) ?></td>
+            <td><?= $this->escapeHtml($recept->sostav) ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+
+
+
+<div id="body">loading...</div>
+<script>
+    function find(){ //Вызов функции сбора всех тегов
+        $.ajax({
+            type: 'POST',
+            url: 'finder.php',
+            data: 'find=1',
+            success: function(data) {
+                document.getElementById('body').innerHTML = 'data';
+            },
+            error:
+                function()
+            {
+                //alert('Problem');
+                document.getElementById('body').innerHTML = 'Problem';
+            }
+        });
+    }
+</script>
+<button type='button' onclick='find()'>test ajax</button><br>

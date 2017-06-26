@@ -1,0 +1,29 @@
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'Admin panel';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('cookbookadm', ['action' => 'add']) ?>">Add new recept</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Consist</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($recepts as $recept) : ?>
+        <tr>
+            <td><?= $this->escapeHtml($recept->name) ?></td>
+            <td><?= $this->escapeHtml($recept->sostav) ?></td>
+
+            <td>
+                <a href="<?= $this->url('cookbookadm', ['action' => 'edit', 'id' => $recept->id]) ?>">Edit</a>
+                <a href="<?= $this->url('cookbookadm', ['action' => 'delete', 'id' => $recept->id]) ?>">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

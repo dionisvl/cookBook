@@ -1,0 +1,25 @@
+<?php
+// module/Cookbook/view/cookbook/cookbook/find.phtml:
+
+$title = 'find recept';
+$this->headTitle($title);
+
+?>
+    <h1><?= $this->escapeHtml($title) ?></h1>
+
+<?php
+$form->setAttribute('action', $this->url('cookbook', ['action' => 'find']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+echo $this->formRow($form->get('find'));
+echo $this->formSubmit($form->get('submit'));
+
+echo $this->form()->closeTag();
+
+?>
+<br>
+<h3>searching results: </h3>
+<?php echo $finds ?>
+<br>
