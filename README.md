@@ -1,6 +1,4 @@
-# ZendSkeletonApplication
-
-Кулинарная книга на ZendFramework3
+# CMS, cookbook based on Zend Framework 3
 
 ## Introduction
 
